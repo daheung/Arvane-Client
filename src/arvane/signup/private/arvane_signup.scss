@@ -1,0 +1,90 @@
+.signup {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  .signup-header {
+    width: 100%;
+    height: 77px;
+  
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    .main-header-logo {
+      cursor: pointer;
+    }
+  }
+
+  .signup-body {
+    position: relative;
+    width: 100%;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .signup-container {
+      position: relative;
+      width: 400px;
+      top: 75px;
+  
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+  
+      .signup-title {
+        font-family: "Inter";
+        font-weight: 700;
+        font-style: Bold;
+        font-size: 50px;
+        line-height: 100%;
+        letter-spacing: 0%;
+      }
+  
+      .user-id-container { margin-top: 30px; }
+      .input-box {
+        width: 400px;
+        margin-top: 20px;
+      }
+      
+      .check-duplication-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+
+        .check-text-box {
+          color: rgb(255, 0, 0);
+          font-size: 12px;
+          margin-left: 10px;
+        }
+
+        .check-duplication {
+          cursor: pointer;
+          width: 122px;
+          height: 50px;
+          
+          border: 1px solid rgba($color: #000000, $alpha: 0.3);
+          border-radius: 15px;
+        }
+      }
+
+      .signup-submit:enabled { 
+        border: 1px solid rgba($color: #000000, $alpha: 0.3); 
+        background-color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
+      }
+      .signup-submit {
+        margin-top: 20px;
+        width: 400px;
+        height: 50px;
+        border-radius: 5px;
+      }
+    }
+  }
+}

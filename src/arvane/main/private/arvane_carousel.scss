@@ -1,0 +1,133 @@
+.main-banner.main-carousel {
+  position: relative;
+  width: 100%;
+  min-height: 575px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding-top: 40px;
+
+  .swiper {
+    .banner-content {
+      width: 100%; 
+      height: 100%;
+      object-fit: "cover";
+    }
+  }
+
+  .banner-container {
+    position: absolute;
+    right: 10%;
+    bottom: 10%;
+
+    width: 234px;
+    height: 46px;
+
+    border-radius: 25px;
+    background-color: rgba(255, 255, 255, 1.0);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+
+    .banner-button-prev-outer {
+      position: relative;
+      width: 46px;
+      height: 100%;
+
+      /* Prev 버튼 본체 */
+      .banner-button-prev {
+        position: absolute;
+        left: 0; top: 0;
+        z-index: 10;
+  
+        width: 46px;
+        height: 100%;
+  
+        background: url("@/assets/carousel/bannerSwiperBtn.png") center center no-repeat;
+        background-size: contain;
+        overflow: hidden;
+      }
+  
+      /* Hover 시 바뀌는 오버레이 이미지 */
+      .banner-button-prev::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transition: opacity .2s ease;
+        pointer-events: none;
+  
+        background: url("@/assets/carousel/bannerSwiperBtn_on.png") center center no-repeat;
+        background-size: contain;
+      }
+    
+      /* hover/focus/활성화 시 노출 */
+      .banner-button-prev:hover::after,
+      .banner-button-prev:focus-visible::after,
+      .banner-button-prev.is-active::after {
+        opacity: 1;
+      }
+    }
+
+    .banner-content-list {
+        width: 142px;
+        height: 100%;
+        position: relative;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        font-size: 18px;
+        
+        .saparater {
+            padding: 0px 5px;
+        }
+    }
+
+    .banner-button-next-outer {
+      position: relative;
+      width: 46px;
+      height: 100%;
+
+      .banner-button-next {
+        position: absolute;
+        left: 0; top: 0;
+        z-index: 10;
+        
+        width: 46px;
+        height: 100%;
+        transform: rotate(180deg);
+        background: url("@/assets/carousel/bannerSwiperBtn.png") center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        overflow: hidden;
+      }
+
+      .banner-button-next::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transition: opacity .2s ease;
+        pointer-events: none;
+  
+        background: url("@/assets/carousel/bannerSwiperBtn_on.png") center center no-repeat;
+        background-size: contain;
+      }
+    
+      /* hover/focus/활성화 시 노출 */
+      .banner-button-next:hover::after,
+      .banner-button-next:focus-visible::after,
+      .banner-button-next.is-active::after {
+        opacity: 1;
+      }
+    }
+  }
+}

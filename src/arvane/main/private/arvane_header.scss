@@ -1,0 +1,28 @@
+.main-header {
+  width: 100%;
+  min-height: 77px;
+
+  display: flex;
+  flex-direction: row;  
+  justify-content: space-between;
+
+  .header-user-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+
+    padding-right: 20px;
+    font-size: 16px;
+    
+    div {
+      cursor: pointer;
+    }
+
+    span {
+        font-size: 12px;
+        padding: 0px 5px;
+    }
+  }
+}

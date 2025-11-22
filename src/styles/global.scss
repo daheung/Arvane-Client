@@ -1,0 +1,28 @@
+* {
+  border: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+html, body, #root {
+  height: 100vh;
+}
+
+@mixin hover-zoom(
+  $scale: 1.06,
+  $duration: .25s,
+  $easing: cubic-bezier(.2,.6,.2,1)
+) {
+
+  transform-origin: 50% 50%;
+  transition: transform $duration $easing;
+  will-change: transform;
+
+  &:hover {
+    transform: scale($scale);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}

@@ -1,0 +1,152 @@
+.arvane-nav {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  .arvane-header {
+    width: 100%;
+    min-height: 77px;
+  
+    display: flex;
+    flex-direction: row;  
+    justify-content: space-between;
+  
+    .header-user-menu {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      text-align: center;
+      align-items: center;
+  
+      padding-right: 20px;
+      font-size: 16px;
+      
+      div {
+        cursor: pointer;
+      }
+  
+      span {
+          font-size: 12px;
+          padding: 0px 5px;
+      }
+    }
+  }
+
+  .arvane-body {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .title {
+      width: 100%;
+      height: 47px;
+      
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      
+      font-family: 'ABeeZee';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 40px;
+      line-height: 47px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      letter-spacing: 0.05em;
+          
+      color: #000000;
+    }
+
+    .navigation {
+      display: flex;
+      flex-direction: row;
+      
+      margin-left: 40px;
+
+      span {
+        font-family: 'Kadwa';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 30px;
+        line-height: 60px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        letter-spacing: -0.05em;
+        
+        padding: 0px 12.5px;
+
+        color: #000000;
+      }
+
+    }
+
+    .navigation + .navigation-line {
+      position: relative;
+      min-height: 1px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      z-index: 10;
+      margin: 0px 40px;
+
+      .horizontal-line {
+        width: 100%;
+        height: 100%;
+        background-color: #000000;
+      }
+    }
+
+    .furniture-desc-container {
+      height: 100%;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+
+      padding: 30px 40px;
+
+      .image-container {
+        min-height: 717px;
+        margin: 0px 40px;
+        flex: 6;
+        background: rgba(217, 217, 217, 0.5);
+        border: 1px solid #000000;
+        border-radius: 20px;
+      }
+
+      .desc-container {
+        height: 717px;
+        margin: 0px 40px;
+        flex: 4;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+
+        [class^="desc-"]:last-child {
+          height: 212px;
+          margin: 0px;
+        }
+
+        [class^="desc-"] {
+          height: 75px;        
+          margin-bottom: 25px;
+          
+          background: #FFFFFF;
+          border: 1px solid #000000;
+          border-radius: 10px;
+        }
+      }
+    }
+  }
+}
+

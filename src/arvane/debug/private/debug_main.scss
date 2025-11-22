@@ -1,0 +1,157 @@
+.arvane-debug {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  .arvane-header {
+    width: 100%;
+    min-height: 77px;
+  
+    display: flex;
+    flex-direction: row;  
+    justify-content: space-between;
+  
+    .header-user-menu {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      text-align: center;
+      align-items: center;
+  
+      padding-right: 20px;
+      font-size: 16px;
+      
+      div {
+        cursor: pointer;
+      }
+  
+      span {
+          font-size: 12px;
+          padding: 0px 5px;
+      }
+    }
+  }
+
+  .arvane-body {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding: 0px 20px;
+
+    .path-container {
+      width: 100%;
+      
+      display: flex;
+      flex-direction: column;
+
+      .path-input-container {
+        width: 100%;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .path-desc-container {
+        width: 100%;
+        
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        line-height: 1.2;
+      }
+    }
+
+    .desc-container {
+      min-width: 1300px;
+      max-height: 1500px;
+
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+
+      .image-container {
+        max-width: 650px;
+        max-height: 750px;
+        overflow-y: scroll;
+
+        flex: 5;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        width: 100%;
+        box-sizing: border-box;
+        margin-top: 16px;
+
+        [class^="image-"] {
+          flex: 1 1 200px;
+          width: 200px;
+          height: auto;
+          object-fit: contain;
+          border-radius: 6px;
+          border: 1px solid #444;
+        }
+      }
+
+      .depth-container {
+        max-width: 650px;
+        max-height: 750px;
+        overflow-y: scroll;
+
+        flex: 5;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        width: 100%;
+        box-sizing: content-box;
+        margin-top: 16px;
+
+        [class^="depth-"] {
+          flex: 1 1 200px;
+          width: 200px;
+          height: auto;
+          object-fit: contain;
+          border-radius: 6px;
+          border: 1px solid #444;
+        }
+      }
+
+      .k-image-container {
+        max-width: 650px;
+        max-height: 750px;
+        overflow-y: scroll;
+
+        flex: 5;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        width: 100%;
+        box-sizing: content-box;
+        margin-top: 16px;
+      }
+
+      .pose-container {
+        max-width: 650px;
+        max-height: 750px;
+        overflow-y: scroll;
+        
+        flex: 5;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        width: 100%;
+        box-sizing: content-box;
+        margin-top: 16px;
+
+        [class^="pose-"] {
+          width: 300px;
+        }
+      }
+    }
+  }
+}
