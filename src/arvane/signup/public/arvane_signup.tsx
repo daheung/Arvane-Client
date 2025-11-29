@@ -1,106 +1,120 @@
-import { RArvaneLogo } from "@/components/logo";
-import { TextField } from "@mui/material";
-import { useState, type FC, type MouseEventHandler } from "react";
-import { useNavigate } from "react-router-dom";
+import {RArvaneLogo} from "@/components/logo";
+import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 import "@/arvane/signup/private/arvane_signup.scss";
+import type {SignInModal} from "@/models/UserModel.ts";
+import {useLazyDuplicatedLoginIdQuery, useSignInMutation} from "@/stores/api/authApi.ts";
+import {ObjText, SingleText} from "mui-fast-start";
 
-type TSignupPropType = {}
-export const RSignup: FC<TSignupPropType> = (_: TSignupPropType) => {
-  const navigate = useNavigate();
-  
-  const [userId, setUserId] = useState<string | null>(null);
-  const [verifyId, setVerifyId] = useState<boolean | null>(null);
-  const [userPassword, setUserPassword] = useState<string | null>(null);
-  const [verifyPassword, setVerifyPassword] = useState<string | null>(null);
-  const [userAddress, setUserAddress] = useState<string | null>(null);
-  const [userPhone, setUserPhone] = useState<string | null>(null);
+export const RSignup = () => {
+    const navigate = useNavigate();
 
-  const handleLogoClick: MouseEventHandler<HTMLDivElement> = (
-    _: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ): void => {
-    navigate("/main");
-  };
+    const [onVerifyId, {data: verifyId}] = useLazyDuplicatedLoginIdQuery();
+    const [onSignIn] = useSignInMutation();
 
-  const checkUserInput = () => {
-    const validId      : boolean = (userId       !== null) && !!verifyId;
-    const validPassword: boolean = (userPassword !== null) && 
-      (verifyPassword !== null) && 
-      (userPassword   === verifyPassword);
-    const validAddress : boolean = (userAddress  !== null);
-    const validPhone   : boolean = (userPhone    !== null);
+    const [verifyPassword, setVerifyPassword] = useState<string>('');
+    const [signIn, setSignIn] = useState<SignInModal>({
+        loginId: '',
+        nickname: '',
+        password: ''
+    });
 
-    return ( validId && validPassword && validAddress && validPhone );
-  }
+    const handleLogoClick = () => navigate("/main");
 
-  const handleVerifyId:  MouseEventHandler<HTMLButtonElement> = (
-    _: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    /** 아직까지는 아이디 확인하지 않음. 추수 기능 추가 예정 */
-    setVerifyId(true);
-  }
+    const checkUserInput = () => {
+        const validId: boolean = (signIn.loginId !== null) && !verifyId;
+        const validPassword: boolean = (signIn.password !== null) &&
+            (verifyPassword !== null) &&
+            (signIn.password === verifyPassword);
+        const validAddress: boolean = (signIn.address !== null);
+        const validPhone: boolean = (signIn.phone !== null);
 
-  return (
-    <div className="signup">
-      <div className="signup-header">
-        <RArvaneLogo handleClick={handleLogoClick} />
-      </div>
-      <div className="signup-body">
-        <div className="signup-container">
-          <div className="signup-title">회원가입</div>
+        return (validId && validPassword && validAddress && validPhone);
+    }
 
-          {/** 아이디 입력 칸 */}
-          <div className="user-id-container">
-            <TextField 
-              className="user-id-input-box input-box" 
-              label="아이디" 
-              value={userId ?? undefined} 
-              onChange={(event) => { setUserId(event.target.value); }} 
-            />
-            <div className="check-duplication-container">
-              <div className="check-text-box">이미 있는 아이디 입니다.</div>
-              <button className="check-duplication" onClick={handleVerifyId}>중복확인</button>
+    const handleSubmit = () => {
+        signIn.nickname = signIn.loginId;
+        onSignIn(signIn).unwrap().then(() => {
+            navigate('/signin')
+            // 회원가입 성공
+        }).catch(() => {
+            // 회원가입 실패
+        });
+    }
+
+    return (
+        <div className="signup">
+            <div className="signup-header">
+                <RArvaneLogo handleClick={handleLogoClick}/>
             </div>
-          </div>
+            <div className="signup-body">
+                <div className="signup-container">
+                    <div className="signup-title">회원가입</div>
 
-          {/** 비밀번호 입력 칸 */}
-          <TextField 
-            className="user-password-input-box input-box" 
-            label="비밀번호" 
-            type="password"
-            value={userPassword ?? undefined} 
-            onChange={(event) => { setUserPassword(event.target.value); }} 
-          />
+                    {/** 아이디 입력 칸 */}
+                    <div className="user-id-container">
+                        <ObjText
+                            className="user-id-input-box input-box"
+                            size='medium'
+                            name="loginId" label="아이디"
+                            get={signIn} set={setSignIn}
+                        />
+                        <div className="check-duplication-container">
+                            {verifyId && (
+                                <div className="check-text-box">이미 있는 아이디 입니다.</div>
+                            )}
+                            <button
+                                className="check-duplication"
+                                onClick={() => onVerifyId(signIn.loginId)}
+                            >
+                                중복확인
+                            </button>
+                        </div>
+                    </div>
 
-          {/** 비밀번호 확인 입력 칸 */}
-          <TextField 
-            className="user-verify-password-input-box input-box" 
-            label="비밀번호 확인" 
-            type="password"
-            value={verifyPassword ?? undefined} 
-            onChange={(event) => { setVerifyPassword(event.target.value); }} 
-          />
+                    {/** 비밀번호 입력 칸 */}
+                    <ObjText<SignInModal>
+                        className="user-password-input-box input-box"
+                        size='medium' type='password'
+                        name='password' label="비밀번호"
+                        get={signIn} set={setSignIn}
+                    />
 
-          {/** 주소 입력 칸 */}  
-          <TextField 
-            className="user-address-input-box input-box" 
-            label="주소" 
-            value={userAddress ?? undefined} 
-            onChange={(event) => { setUserAddress(event.target.value); }} 
-          />
+                    {/** 비밀번호 확인 입력 칸 */}
+                    <SingleText
+                        className="user-verify-password-input-box input-box"
+                        size='medium' type='password'
+                        label="비밀번호 확인"
+                        get={verifyPassword} set={setVerifyPassword}
+                    />
 
-          {/** 전화번호 입력 칸 */}
-          <TextField 
-            className="user-phone-input-box input-box" 
-            label="전화번호" 
-            value={userPhone ?? undefined} 
-            onChange={(event) => { setUserPhone(event.target.value); }} 
-          />
+                    {/** 주소 입력 칸 */}
+                    <ObjText<SignInModal>
+                        className="user-address-input-box input-box"
+                        size='medium'
+                        name='address' label="주소"
+                        get={signIn} set={setSignIn}
+                    />
 
-          {/** 회원가입 버튼 */}
-          <button className="signup-submit" disabled={!checkUserInput()}>회원가입</button>
+                    {/** 전화번호 입력 칸 */}
+                    <ObjText
+                        className="user-phone-input-box input-box"
+                        size='medium'
+                        name="phone" label="전화번호"
+                        get={signIn} set={setSignIn}
+                    />
+
+                    {/** 회원가입 버튼 */}
+                    <button
+                        className="signup-submit"
+                        disabled={!checkUserInput()}
+                        onClick={handleSubmit}
+                    >
+                        회원가입
+                    </button>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  )
+    )
 }

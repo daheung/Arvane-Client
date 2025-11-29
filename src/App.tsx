@@ -31,11 +31,9 @@ function App() {
   return (
     <>
       <Routes>
-        { 
-          routeDescriptions.map((value: TRouteDescription, index: number) => {
+        {routeDescriptions.map((value: TRouteDescription, index: number) => {
             return <Route key={index} path={value.path} element={ <value.element /> } />
-          }) 
-        }
+        })}
 
         { /* 어떤 경로에도 매칭 안 되면 / 로 이동 */ }
         <Route path="*" element={<Navigate to="/main" replace />} />
